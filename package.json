@@ -1,0 +1,11 @@
+{
+  "name": "html",
+  "version": "1.0.0",
+  "scripts": {
+    "meta": "node meta/Meta.js"
+  },
+  "author": "Moh. SD",
+  "private": true,
+  "type": "module",
+  "license": "ISC"
+}
