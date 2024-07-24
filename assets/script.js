@@ -21,3 +21,5 @@ if (page) {
     .then((m) => m.default())
     .catch(dom.error);
 }
+
+dom.setCopyright();

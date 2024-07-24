@@ -1,6 +1,6 @@
 :root {
   /* colors */
-  --clr: 0;
+  --clr: 120;
   --clr-black: var(--clr), 10%, 10%;
   --clr-grey: var(--clr), 10%, 50%;
   --clr-white: var(--clr), 10%, 90%;

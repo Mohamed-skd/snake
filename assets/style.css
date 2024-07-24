@@ -8,27 +8,27 @@
 
 /* layout */
 body {
-min-height: 100dvh;
+  min-height: 100dvh;
 }
 body > * {
-display: flow-root;
+  display: flow-root;
 }
 body > header {
-h1 {
-padding: 1rem;
-width: fit-content;
-@media (width > 40rem) {
-padding: 2rem 4rem;
-}
-}
+  h1 {
+    padding: 1rem;
+    width: fit-content;
+    @media (width > 40rem) {
+      padding: 1rem 4rem;
+    }
+  }
 }
 body > main {
-margin: 2rem auto;
-& > section {
-margin: 1rem auto;
-width: min(80rem, 100% - 1rem);
-}
+  margin: 1rem auto;
+  & > section {
+    margin: 1rem auto;
+    width: min(80rem, 100% - 1rem);
+  }
 }
 body > footer {
-padding: 0.2rem 2rem;
+  padding: 0.2rem 2rem;
 }
