@@ -31,11 +31,11 @@ export default async function () {
       ],
     };
     let food = [];
-    let startTime;
     let isPlaying = false;
     let reset = false;
     let score = 0;
     let highscore = highScoreHist.get() ?? 0;
+    let startTime = null;
 
     function setFoodPos() {
       const x = Math.floor(numFn.rand(cWidth + 1 / 2, 1 / 2) * size);
@@ -61,6 +61,11 @@ export default async function () {
       drawFood();
       setScore();
     }
+    /**
+     * Start game and change snake direction
+     * @param {KeyboardEvent} e
+     * @returns
+     */
     function move(e) {
       if (reset) return;
       const key = e.key;
@@ -74,6 +79,10 @@ export default async function () {
       if (snake.direction === directions[key][1]) return;
       snake.direction = directions[key][0];
     }
+    /**
+     * @param {DOMHighResTimeStamp} time
+     * @returns
+     */
     function gameLoop(time) {
       if (!isPlaying) return;
       startTime = startTime ? startTime : time;
@@ -126,6 +135,11 @@ export default async function () {
 
       return requestAnimationFrame(gameLoop);
     }
+    /**
+     * Check snake collision with food or self
+     * @param {Number[]} elem
+     * @returns
+     */
     function eat(elem) {
       return snake.body[0][0] === elem[0] && snake.body[0][1] === elem[1];
     }
