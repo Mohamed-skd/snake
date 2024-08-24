@@ -573,7 +573,7 @@ export class Dom extends Base {
    */
   setCopyright(
     info = "Par ",
-    link = { ref: "https://ko-fi.com/mohsd", text: "Moh. SD" }
+    link = { ref: "https://paypal.me/mohamedSkd", text: "Moh. SD" }
   ) {
     try {
       if (info && typeof info !== "string") throw new Error("Invalid info.");
