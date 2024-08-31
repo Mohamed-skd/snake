@@ -1,0 +1,1 @@
+import{NumberFuncs,StringFuncs,DateFuncs,Dom,Fetch}from"./scripts/Funcs.js";let numFn=new NumberFuncs,strFn=new StringFuncs,dateFn=new DateFuncs,dom=new Dom,fetchFn=new Fetch,page=document.body.dataset.page;page&&import(`./${page}/app.js`).then(e=>e.default()).catch(dom.error),dom.setCopyright();export{numFn,strFn,dateFn,dom,fetchFn};

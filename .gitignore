@@ -9,8 +9,6 @@ lerna-debug.log*
 
 node_modules
 vendor
-dist
-dist-ssr
 meta
 meta-js
 meta-php
