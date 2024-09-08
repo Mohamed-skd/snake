@@ -16,16 +16,14 @@ export class NumberFuncs extends Base {
     options = { style: "currency", currency: "EUR" },
     local = "fr-FR"
   ) {
-    let res;
     try {
       if (local && typeof local !== "string") throw new Error("Invalid local.");
       if (options && !(options instanceof Object))
         throw new Error("Invalid options.");
-      res = new Intl.NumberFormat(local, options);
+      return new Intl.NumberFormat(local, options);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -37,8 +35,6 @@ export class NumberFuncs extends Base {
    * @returns
    */
   range(max = 100, min = 0, step = 1, type = 0) {
-    let res;
-
     try {
       if (typeof max !== "number") throw new Error("Invalid max.");
       if (typeof min !== "number") throw new Error("Invalid min.");
@@ -53,12 +49,10 @@ export class NumberFuncs extends Base {
 
       const str = arr.join(" ");
       const types = [arr, str];
-      res = types[type];
+      return types[type];
     } catch (err) {
       return this.error(err);
     }
-
-    return res;
   }
 
   /**
@@ -68,15 +62,13 @@ export class NumberFuncs extends Base {
    * @returns
    */
   rand(max = 101, min = 0) {
-    let res;
     try {
       if (typeof max !== "number") throw new Error("Invalid max.");
       if (typeof min !== "number") throw new Error("Invalid min.");
-      res = Math.floor(Math.random() * (max - min)) + min;
+      return Math.floor(Math.random() * (max - min)) + min;
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -85,14 +77,12 @@ export class NumberFuncs extends Base {
    * @returns
    */
   isEven(num) {
-    let res;
     try {
       if (typeof num !== "number") throw new Error("Invalid num.");
-      res = !(num & 1);
+      return !(num & 1);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -101,14 +91,12 @@ export class NumberFuncs extends Base {
    * @returns
    */
   sum(nums) {
-    let res;
     try {
       if (!(nums instanceof Array)) throw new Error("Invalid nums.");
-      res = nums.reduce((a, b) => a + b);
+      return nums.reduce((a, b) => a + b);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -117,15 +105,13 @@ export class NumberFuncs extends Base {
    * @returns
    */
   avg(nums) {
-    let res;
     try {
       if (!(nums instanceof Array)) throw new Error("Invalid nums.");
       const sum = this.sum(nums);
-      res = sum / nums.length;
+      return sum / nums.length;
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -134,8 +120,6 @@ export class NumberFuncs extends Base {
    * @returns
    */
   median(nums) {
-    let med;
-
     try {
       if (!(nums instanceof Array)) throw new Error("Invalid nums.");
 
@@ -143,16 +127,14 @@ export class NumberFuncs extends Base {
 
       if (this.isEven(sorted.length)) {
         const mid = sorted.length / 2;
-        med = this.avg([sorted[mid - 1], sorted[mid]]);
+        return this.avg([sorted[mid - 1], sorted[mid]]);
       } else {
         const floor = Math.floor(sorted.length / 2);
-        med = sorted[floor];
+        return sorted[floor];
       }
     } catch (err) {
       return this.error(err);
     }
-
-    return med;
   }
 
   /**
@@ -163,16 +145,14 @@ export class NumberFuncs extends Base {
    * @returns
    */
   clamp(num, min, max) {
-    let res;
     try {
       if (typeof num !== "number") throw new Error("Invalid num.");
       if (typeof min !== "number") throw new Error("Invalid min.");
       if (typeof max !== "number") throw new Error("Invalid max.");
-      res = Math.min(Math.max(num, min), max);
+      return Math.min(Math.max(num, min), max);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 }
 export class StringFuncs extends Base {
@@ -186,8 +166,6 @@ export class StringFuncs extends Base {
    * @returns
    */
   getString(type = "letters") {
-    let res;
-
     try {
       if (typeof type !== "string") throw new Error("Invalid type.");
 
@@ -198,14 +176,12 @@ export class StringFuncs extends Base {
       };
 
       if (type === "all") {
-        res = strings.letters + strings.numbers + strings.symbols;
+        return strings.letters + strings.numbers + strings.symbols;
       }
-      res = strings[type];
+      return strings[type];
     } catch (err) {
       return this.error(err);
     }
-
-    return res;
   }
 
   /**
@@ -214,18 +190,16 @@ export class StringFuncs extends Base {
    * @returns
    */
   formatText(string) {
-    let res;
     try {
       if (typeof string !== "string") throw new Error("Invalid string.");
       let base = "";
       const uc = string[0].toUpperCase();
       const remainder = string.substring(1).toLowerCase();
       base = `${uc}${remainder}`;
-      res = base.replaceAll("-", " ").trim();
+      return base.replaceAll("-", " ").trim();
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -234,17 +208,18 @@ export class StringFuncs extends Base {
    * @returns
    */
   shuffle(string) {
-    let base = "";
     try {
       if (typeof string !== "string") throw new Error("Invalid string.");
+
+      let base = "";
       for (let i = 0; i < string.length; i++) {
         const random = Math.floor(Math.random() * string.length);
         base += string[random];
       }
+      return base;
     } catch (err) {
       return this.error(err);
     }
-    return base;
   }
 
   /**
@@ -253,14 +228,12 @@ export class StringFuncs extends Base {
    * @returns
    */
   strRev(str) {
-    let res;
     try {
       if (typeof str !== "string") throw new Error("Invalid str.");
-      res = str.split("").reverse().join("").toLowerCase();
+      return str.split("").reverse().join("").toLowerCase();
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -269,14 +242,25 @@ export class StringFuncs extends Base {
    * @returns
    */
   slug(string) {
-    let res;
     try {
       if (typeof string !== "string") throw new Error("Invalid string.");
-      res = string.match(/\w+/)?.[0];
+      return string.match(/\w+/)?.[0];
     } catch (err) {
       return this.error(err);
     }
-    return res;
+  }
+
+  /**
+   * Client side input validation
+   * @param {String} value The input string
+   * @param {Number} limit Size limit of the input
+   * @returns
+   */
+  validateInput(value, limit = 100) {
+    if (!value) return false;
+    if (typeof limit !== "number") throw new Error("Invalid limit.");
+    if (!typeof value === "string" && value.length <= limit) return null;
+    return value;
   }
 }
 export class DateFuncs extends Base {
@@ -292,16 +276,14 @@ export class DateFuncs extends Base {
    * @returns
    */
   dateFormater(options, local = "fr-FR") {
-    let res;
     try {
       if (local && typeof local !== "string") throw new Error("Invalid local.");
       if (options && !(options instanceof Object))
         throw new Error("Invalid options.");
-      res = new Intl.DateTimeFormat(local, options);
+      return new Intl.DateTimeFormat(local, options);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -317,16 +299,14 @@ export class DateFuncs extends Base {
     },
     local = "fr-FR"
   ) {
-    let res;
     try {
       if (local && typeof local !== "string") throw new Error("Invalid local.");
       if (options && !(options instanceof Object))
         throw new Error("Invalid options.");
-      res = new Intl.RelativeTimeFormat(local, options);
+      return new Intl.RelativeTimeFormat(local, options);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -335,14 +315,12 @@ export class DateFuncs extends Base {
    * @returns
    */
   dateToUnix(date) {
-    let res;
     try {
       if (!(date instanceof Date)) throw new Error("Invalid date.");
-      res = Math.round(Date.parse(date) / 1000);
+      return Math.round(Date.parse(date) / 1000);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
   /**
    * Return unix seconds in Date
@@ -350,14 +328,12 @@ export class DateFuncs extends Base {
    * @returns
    */
   unixToDate(unix) {
-    let res;
     try {
       if (typeof unix !== "number") throw new Error("Invalid unix.");
-      res = new Date(unix * 1000);
+      return new Date(unix * 1000);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -366,14 +342,12 @@ export class DateFuncs extends Base {
    * @returns
    */
   dayToSeconds(day = 7) {
-    let res;
     try {
       if (typeof day !== "number") throw new Error("Invalid day.");
-      res = day * 86400;
+      return day * 86400;
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -382,14 +356,12 @@ export class DateFuncs extends Base {
    * @returns
    */
   secondsToDay(seconds) {
-    let res;
     try {
       if (typeof seconds !== "number") throw new Error("Invalid seconds.");
-      res = Math.round(seconds / 86400);
+      return Math.round(seconds / 86400);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 }
 export class Dom extends Base {
@@ -403,14 +375,12 @@ export class Dom extends Base {
    * @returns
    */
   select(tag) {
-    let res;
     try {
       if (typeof tag !== "string") throw new Error("Invalid tag.");
-      res = document.querySelector(tag);
+      return document.querySelector(tag);
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -419,14 +389,12 @@ export class Dom extends Base {
    * @returns
    */
   selectAll(tag) {
-    let res;
     try {
       if (typeof tag !== "string") throw new Error("Invalid tag.");
-      res = Array.from(document.querySelectorAll(tag));
+      return Array.from(document.querySelectorAll(tag));
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 
   /**
@@ -436,19 +404,18 @@ export class Dom extends Base {
    * @returns
    */
   create(tag, attribs) {
-    let elem;
     try {
       if (typeof tag !== "string") throw new Error("Invalid tag.");
-      elem = document.createElement(tag);
+      const elem = document.createElement(tag);
       if (!attribs) return elem;
       if (!(attribs instanceof Object)) throw new Error("Invalid attribs.");
       for (const [attr, value] of Object.entries(attribs)) {
         elem.setAttribute(attr, value);
       }
+      return elem;
     } catch (err) {
       return this.error(err);
     }
-    return elem;
   }
 
   /**
@@ -474,7 +441,6 @@ export class Dom extends Base {
     } catch (err) {
       return this.error(err);
     }
-
     return true;
   }
 
@@ -509,8 +475,8 @@ export class Dom extends Base {
   notify(content, type, delay = 2) {
     try {
       if (typeof content !== "string") throw new Error("Invalid content.");
-      if (typeof type !== "string") throw new Error("Invalid type.");
-      if (typeof delay !== "number") throw new Error("Invalid delay.");
+      if (type && typeof type !== "string") throw new Error("Invalid type.");
+      if (delay && typeof delay !== "number") throw new Error("Invalid delay.");
       const notifications = this.select("#notifications");
       if (!notifications) throw new Error("No root in DOM.");
       const p = this.create("p");
@@ -606,8 +572,6 @@ export class Dom extends Base {
    * @returns
    */
   canvas(canvas) {
-    let res;
-
     try {
       if (!(canvas instanceof HTMLCanvasElement))
         throw new Error("Invalid canvas.");
@@ -680,12 +644,95 @@ export class Dom extends Base {
         return true;
       };
 
-      res = { ctxt, draw, clear };
+      return { ctxt, draw, clear };
     } catch (err) {
       return this.error(err);
     }
+  }
 
-    return res;
+  /**
+   * Remove children of a DOM element
+   * @param {HTMLElement} parent Parent element
+   * @returns
+   */
+  removeChildren(parent) {
+    while (parent.firstElementChild) {
+      parent.firstElementChild.remove();
+    }
+    return true;
+  }
+
+  /**
+   * Prepend Html string in DOM element
+   * @param {HTMLElement} parent Parent element
+   * @param {String} html Html content
+   * @returns
+   */
+  prependHtml(parent, html) {
+    parent.insertAdjacentHTML("afterbegin", html);
+    return true;
+  }
+
+  /**
+   * Append Html string in DOM element
+   * @param {HTMLElement} parent Parent element
+   * @param {String} html Html content
+   * @returns
+   */
+  appendHtml(parent, html) {
+    parent.insertAdjacentHTML("beforeend", html);
+    return true;
+  }
+
+  /**
+   * Handle dark theme
+   * @param {HTMLElement[] | null} elems Optional element which theme change
+   * @returns
+   */
+  handleTheme(elems = null) {
+    try {
+      const themeDom = this.select("#theme");
+      if (!themeDom) throw new Error("Invalid theme.");
+      const fetchFn = new Fetch();
+      const button = this.create("button", { title: "Theme" });
+      const mediaScheme = matchMedia("(prefers-color-scheme:dark)");
+      const histTheme = fetchFn.local("dark-theme");
+      let darkTheme = histTheme.get() ?? mediaScheme.matches;
+
+      const setTheme = () => {
+        if (darkTheme) {
+          document.documentElement.style.colorScheme = "dark";
+          if (elems) {
+            for (let i = 0; i < elems.length; i++) {
+              this.modClass(elems[i], "dark");
+            }
+          }
+        } else {
+          document.documentElement.style.colorScheme = "light";
+          if (elems) {
+            for (let i = 0; i < elems.length; i++) {
+              this.modClass(elems[i], "dark", "del");
+            }
+          }
+        }
+        histTheme.set(darkTheme);
+      };
+      const togTheme = () => {
+        darkTheme = !darkTheme;
+        setTheme();
+      };
+
+      setTheme();
+      themeDom.append(button);
+      button.addEventListener("click", togTheme);
+      mediaScheme.addEventListener("change", () => {
+        darkTheme = mediaScheme.matches;
+        setTheme();
+      });
+    } catch (err) {
+      return this.error(err);
+    }
+    return true;
   }
 }
 export class Fetch extends Base {
@@ -701,8 +748,6 @@ export class Fetch extends Base {
    * @returns
    */
   async get(target = location.pathname, value = null, rType = "json") {
-    let data;
-
     try {
       if (value && !(value instanceof Object))
         throw new Error("Invalid value.");
@@ -711,6 +756,7 @@ export class Fetch extends Base {
 
       const request = this.objToReq(value);
       const req = await fetch(request ? `${target}?${request}` : target);
+      let data;
 
       switch (rType) {
         case "json":
@@ -720,11 +766,11 @@ export class Fetch extends Base {
           data = await req.text();
           break;
       }
+
+      return data;
     } catch (err) {
       return this.error(err);
     }
-
-    return data;
   }
 
   /**
@@ -735,8 +781,6 @@ export class Fetch extends Base {
    * @returns
    */
   async post(target = location.pathname, value = null, rType = "json") {
-    let data;
-
     try {
       if (value && !(value instanceof Object))
         throw new Error("Invalid value.");
@@ -751,6 +795,7 @@ export class Fetch extends Base {
           "content-type": "application/x-www-form-urlencoded",
         },
       });
+      let data;
 
       switch (rType) {
         case "json":
@@ -760,11 +805,11 @@ export class Fetch extends Base {
           data = await req.text();
           break;
       }
+
+      return data;
     } catch (err) {
       return this.error(err);
     }
-
-    return data;
   }
 
   /**
@@ -773,18 +818,18 @@ export class Fetch extends Base {
    * @returns
    */
   objToReq(value) {
-    let req = "";
     try {
       if (!value) return null;
       if (!(value instanceof Object)) throw new Error("Invalid value.");
+      let req = "";
       for (const key in value) {
         const val = `${value[key]}`.trim();
         req += `${key}=${val}&`;
       }
+      return req;
     } catch (err) {
       return this.error(err);
     }
-    return req;
   }
 
   /**
@@ -793,7 +838,6 @@ export class Fetch extends Base {
    * @returns
    */
   local(key) {
-    let res;
     try {
       if (typeof key !== "string") throw new Error("Invalid key.");
       const get = () => {
@@ -802,10 +846,9 @@ export class Fetch extends Base {
       const set = (val) => {
         localStorage.setItem(key, JSON.stringify(val));
       };
-      res = { get, set };
+      return { get, set };
     } catch (err) {
       return this.error(err);
     }
-    return res;
   }
 }

@@ -1,3 +1,1 @@
 # Snake
-
-Exemple de jeu.

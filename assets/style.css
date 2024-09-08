@@ -3,12 +3,21 @@
 @import url("./styles/lib.css");
 @import url("./styles/anims.css");
 
-/* pages */
-@import url("./homepage/style.css");
-
 /* layout */
 body {
   min-height: 100dvh;
+  text-align: center;
+  background-color: hsl(var(--clr-lighter), 0.2);
+  &:has(canvas.is-playing) {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--clr-lighter)),
+      hsl(var(--clr-lighter), 0.6),
+      hsl(var(--clr-lighter), 0.2),
+      hsl(var(--clr-lighter), 0.6),
+      hsl(var(--clr-lighter))
+    );
+  }
 }
 body > * {
   display: flow-root;
@@ -28,7 +37,24 @@ body > main {
     margin: 1rem auto;
     width: min(80rem, 100% - 1rem);
   }
+
+  aside {
+    padding: 0.2rem 2rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  canvas {
+    border-radius: 1rem;
+    background-color: white;
+    transition: all 0.2s;
+    border: 1px solid black;
+    &.is-playing {
+      box-shadow: 0.4rem 0.4rem 1rem black;
+    }
+  }
 }
 body > footer {
+  margin-top: 4rem;
   padding: 0.2rem 2rem;
 }

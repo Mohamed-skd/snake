@@ -15,9 +15,22 @@
   gap: 0.4rem;
 }
 
+.opt-sm {
+  @media (width > 40rem) {
+    display: none;
+  }
+}
+.opt-bg {
+  display: none;
+  @media (width > 40rem) {
+    display: block;
+  }
+}
+
 /* links & buttons */
 .link,
 .bt {
+  display: inline-block;
   font-weight: bold;
   color: currentColor;
 }
@@ -115,5 +128,19 @@
     &:hover {
       opacity: 1;
     }
+  }
+}
+
+#theme {
+  position: absolute;
+  z-index: 20;
+  inset: 6rem 2rem auto auto;
+
+  button {
+    width: 2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: currentColor;
+    cursor: pointer;
   }
 }
